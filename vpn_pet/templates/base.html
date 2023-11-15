@@ -1,0 +1,55 @@
+<!doctype html>
+{% load bootstrap5 %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <title>Hello, world!</title>
+
+    <style media="screen">
+      .fa-github{
+        font-size: 50px;
+        color: black;
+      }
+
+      .fa-twitter{
+        font-size: 50px;
+        color: black;
+      }
+
+      .fa-twitter:hover{
+        color: #1DA1F2;
+        transition: 0.3s;
+      }
+
+      .fa-linkedin-square{
+        font-size: 50px;
+        color: black;
+      }
+
+      .fa-linkedin-square:hover{
+        color: #0072b1;
+        transition: 0.3s;
+      }
+
+    </style>
+
+    </style>
+  </head>
+  <body class="d-flex flex-column min-vh-100">
+    {% include "base/snippets/messages.html" %}
+    {% include "base/snippets/navbar.html" %}
+    <div class="container">
+      {% block content %}
+
+      {% endblock content %}
+    </div>
+
+    {% include "base/snippets/footer.html" %}
+  </body>
+</html>

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <p class="h1 text-center mb-4">Welcome to the Profile page, {{user.get_full_name}}!</p>
+    <h4>You can either change your personal data or head over to the <i>Sites</i> page and manage them.</h4>
+    <div class="d-flex justify-content-between py-3">
+        <a href="{% url 'home' %}" class="btn btn-light btn-lg">&laquo; Back to home page</a>
+        <a href="{% url 'sites_management:user_sites' %}" class="btn btn-dark btn-lg">Go to created sites stats &raquo;</a>
+    </div>
+    <hr>
+
+    <div class="row">
+        <div class="col-6">
+            <h3>About you</h3>
+            <p>Sites created: {{sites_created}}</p>
+            <p>Total external site interactions: {{total_site_interactions}}</p>
+            <p>Joined at: </p>
+        </div>
+        <div class="col-6">
+            <h3>Edit profile</h3>
+            <form action="{% url 'edit_profile' %}" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="emailInput" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="emailInput" name="change-email" value="{{request.user.email}}">
+                  </div>
+                  <div class="mb-3">
+                    <label for="fullNameInput" class="form-label">Full Name</label>
+                    <input class="form-control" id="fullNameInput" name="change-fullname" type="text" value="{{request.user.full_name}}"></input>
+                </div>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-dark btn-lg" type="submit">Submit Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    
+{% endblock content %}

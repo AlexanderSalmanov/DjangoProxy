@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between pt-2">
+  <a class="btn btn-light pt-3" href="{% url 'profile' %}">&laquo; Back to profile</a>
+  <h1>Sites by {{request.user.email}}.</h1>
+  <a href="" class='btn btn-dark dropdown-toggle pt-3' id="newSiteDropdown" data-bs-toggle="dropdown" data-bs-expanded="false"><i class="fa fa-plus"></i> New Site</a>
+  <ul class="dropdown-menu" aria-labelledby="newSiteDropdown">
+    <li class="dropdown-item">
+      <form action="{% url 'sites_management:create' %}" method="post">
+        {% csrf_token %}
+        <div class="my-3">
+          <label for="site-name" class="form-label">Site Name</label>
+          <input type="text" name="site-name" class="form-control" placeholder="New Site">
+        </div>
+        <div class="my-3">
+          <label for="site-external-url" class="form-label">External URL</label>
+          <input type="text" name="site-external-url" class="form-control" placeholder="http://abc123.com">
+        </div>
+        <div class="d-grid gap-2">
+          <button class="btn btn-dark btn-lg" type="submit">Create site</button>
+        </div>
+      </form>
+    </li>
+  </ul>
+</div>
+
+<table class='table'>
+    <thead>
+      <th>#</th>
+      <th>Site Name</th>
+      <th>External URL</th>
+      <th>Data Received</th>
+      <th>Number of interactions</th>
+      <th>Action</th>
+    </thead>
+  {% for site in sites %}
+    <tr class='site-item'>
+      <td>{{forloop.counter}}</td>
+      <td>
+        <a href="{% url 'go_to_site_external_data' slug=site.slug %}" target="_blank">{{site.name}}</a>
+      </td>
+      <td>
+        <a>{{site.external_url}}</a>
+      </td>
+      <td>
+        {{site.data_throughput}} bytes
+      </td>
+      <td>
+        {{site.num_transitions}}
+      </td>
+      <td>
+        <a href="{% url 'sites_management:delete' slug=site.slug %}" style="color: red; text-decoration: none;"><i class="fa fa-trash"></i> </a>
+      </td>
+    </tr>
+
+  {% empty %}
+    <h3>No sites yet. Create one!</h3>
+  {% endfor %}
+  </table>
+
+{% endblock content %}

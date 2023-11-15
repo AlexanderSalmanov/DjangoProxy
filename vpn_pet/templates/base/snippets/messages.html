@@ -1,0 +1,18 @@
+{% if messages %}
+  {% for message in messages %}
+  <div class="container-fluid p-0">
+    <div class="alert {{message.tags}} alert-dismissible fade show" role='alert'>
+      <button type="button" class='btn-close' data-bs-dismiss='alert' aria-label='close' name="button"></button>
+      {{message}}
+    </div>
+  </div>
+  <script>
+    // Handle message timeout with jQuery
+    $(document).ready(function(){
+        setTimeout(function(){
+            $(".alert").alert('close');
+        }, {{ message.extra_tags|default:3000 }});
+    });
+  </script>
+  {% endfor %}
+{% endif %}
