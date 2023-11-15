@@ -18,8 +18,9 @@ If the user clicks on an external route - the application redirects him/her to t
 ## Local installation steps
 
 1. `git clone` the repository to the desired directory.
-2. Build the project with `docker-compose build`.
-3. Run the project in docker with `docker-compose up`.
-4. Run the database migrations with `docker-compose exec api python manage.py migrate`. Make sure that both `api` and `db` containers are running!
-5. Create a superuser with `docker-compose exec api python manage.py createsuperuser` (Optional) 
-6. Navigate to `localhost:8000` in your browser and test the application!
+2. Create the `.env` file at the same location as `.env.example`. Copy the contents of `.env.example` to `.env`.
+3. Build the project with `docker-compose build`.
+4. Run the project in docker with `docker-compose up`.
+5. Run the database migrations with `docker-compose exec api python manage.py migrate`. Make sure that both `api` and `db` containers are running!
+6. Create a superuser with `docker-compose exec api python manage.py createsuperuser` (Optional) 
+7. Navigate to `localhost:8000` in your browser and test the application!
