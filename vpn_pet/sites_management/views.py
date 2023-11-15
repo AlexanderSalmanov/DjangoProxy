@@ -61,7 +61,8 @@ class CreateNewSite(LoginRequiredMixin, generic.View):
                 "Double-check the URL and try again.",
             )
             return redirect("sites_management:user_sites")
-        site.save()
+        else:
+            site.save()
         messages.success(request, f"The site {site.name} was created successfully!")
         return redirect("sites_management:user_sites")
 
