@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load byte_filters %}
 
 {% block content %}
 
@@ -32,6 +33,7 @@
       <th>Site Name</th>
       <th>External URL</th>
       <th>Data Received</th>
+      <th>Data Sent</th>
       <th>Number of interactions</th>
       <th>Action</th>
     </thead>
@@ -45,7 +47,10 @@
         <a>{{site.external_url}}</a>
       </td>
       <td>
-        {{site.data_throughput}} bytes
+        {{site.data_throughput | bytes_to_megabytes}}
+      </td>
+      <td>
+        {{site.data_output | bytes_to_megabytes}}
       </td>
       <td>
         {{site.num_transitions}}

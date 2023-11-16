@@ -95,9 +95,12 @@ class GoToSiteExternalData(LoginRequiredMixin, generic.View):
         tag_mgr.set_internal_routing()
         processed_html = tag_mgr.processed_html()
 
+        data_sent = request.session["site_data_sent"]["sent_data"]
+
+        site.data_output += data_sent
         site.data_throughput += sys.getsizeof(html_data)
         site.num_transitions += 1
-        site.save(update_fields=["data_throughput", "num_transitions"])
+        site.save(update_fields=["data_throughput", "data_output", "num_transitions"])
         return render(
             request,
             template_name="sites_management/external.html",
