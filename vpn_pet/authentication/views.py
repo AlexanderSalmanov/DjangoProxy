@@ -1,4 +1,5 @@
 from django.shortcuts import redirect
+from django.db.models import Max
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.auth import login, logout
@@ -48,6 +49,16 @@ class ProfileView(LoginRequiredMixin, generic.DetailView):
         context["sites_created"] = all_sites.count()
         context["total_site_interactions"] = sum(
             [site.num_transitions for site in all_sites]
+        )
+
+        max_transitions = all_sites.aggregate(Max("num_transitions"))
+        most_visited_site_obj = all_sites.filter(
+            num_transitions=max_transitions["num_transitions__max"]
+        ).first()
+        context["most_visited_site"] = (
+            most_visited_site_obj.name
+            if hasattr(most_visited_site_obj, "name")
+            else None
         )
         return context
 

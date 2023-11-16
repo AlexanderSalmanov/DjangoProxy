@@ -12,9 +12,12 @@
     <div class="row">
         <div class="col-6">
             <h3>About you</h3>
-            <p>Sites created: {{sites_created}}</p>
-            <p>Total external site interactions: {{total_site_interactions}}</p>
-            <p>Joined at: </p>
+            <div class="my-3">
+                <p class="h5">Joined at: <span class="badge bg-dark">{{ user.created_at|date:"F j, Y H:i" }}</span></p>
+                <p class="h5">Sites created: <span class="badge bg-dark">{{sites_created}}</span></p>
+                <p class="h5">Total external site interactions: <span class="badge bg-dark">{{total_site_interactions}}</span></p>
+                <p class="h5">Most visited site: <span class="badge bg-dark">{{most_visited_site}}</span></p>
+            </div>
         </div>
         <div class="col-6">
             <h3>Edit profile</h3>
